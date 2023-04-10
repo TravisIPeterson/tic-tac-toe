@@ -1,5 +1,3 @@
-
-
 module GridCreator
 
     def grid(array)
@@ -46,19 +44,33 @@ class GameTools
     include AddToPlayerArray
     include VictoryCheck
 
-    def initialize(name, symbol)
-        @name = name
-        @symbol = symbol
-        @array = []
-        @player_choice = ""
-    end
+    @@board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    @@victory = [[1,2,3], [4,5,6], [7,8,9], [1,4,7], [2,5,8], [3,6,9], [1,5,9], [3,5,7]]
 
     def player_array_update
         add_to_array(@array, @player_choice)
     end
 
-    
+    def grid_update
+        replace(@@board, @player_choice, @symbol)
+    end
+
+    def win_check
+        is_winner?(@@victory, @array)
+    end
 
 end
 
-victory = [[1,2,3], [4,5,6], [7,8,9], [1,4,7], [2,5,8], [3,6,9], [1,5,9], [3,5,7]]
+class Player < GameTools
+
+    attr_reader :name, :symbol
+    attr_accessor :array, :player_choice
+
+    def initialize(name, symbol)
+        @name = name
+        @symbol = symbol
+        @array = Array.new
+        @player_choice = ""
+    end
+
+end
