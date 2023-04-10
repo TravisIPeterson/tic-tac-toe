@@ -31,7 +31,7 @@ module Game
         @current_player = @player1
         other_player = @player2
         @game = GameTools.new
-        while turn < 9
+        while turn <= 10
             @game.grid_display
             puts "\n#{@current_player.name}, which space would you like to claim?"
             @current_player.player_choice = gets.chomp.to_i
